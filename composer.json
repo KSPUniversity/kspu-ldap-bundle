@@ -22,7 +22,7 @@
         "symfony/http-kernel": ">=2.5.3",
         "symfony/translation": ">=2.5.3",
         "sensio/framework-extra-bundle": ">=3.0.1",
-        "fr3d/ldap-bundle": "2.0.x-dev",
+        "fr3d/ldap-bundle": "2.0.*@dev",
         "kspu/ldap": "~1.0"
     },
 
