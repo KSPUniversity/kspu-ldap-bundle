@@ -1,0 +1,41 @@
+{
+    "name": "kspu/ldap-bundle",
+    "description": "Kspu Symfony2 Bundle for kspu/ldap integration",
+    "license": "MIT",
+    "keywords": ["ldap", "authentication", "security"],
+    "authors": [
+        {
+            "name": "Alexey Trofimov",
+            "email": "dmzkrsk@gmail.com"
+        }
+    ],
+
+    "require": {
+        "php": ">=5.3.3",
+        "ext-ldap": "*",
+        "symfony/framework-bundle": ">=2.5.3",
+        "symfony/security": ">=2.5.3",
+        "symfony/security-bundle": ">=2.5.3",
+        "symfony/config": ">=2.5.3",
+        "symfony/dependency-injection": ">=2.5.3",
+        "symfony/yaml": ">=2.5.3",
+        "symfony/http-kernel": ">=2.5.3",
+        "symfony/translation": ">=2.5.3",
+        "sensio/framework-extra-bundle": ">=3.0.1",
+        "fr3d/ldap-bundle": "2.0.x-dev",
+        "kspu/ldap": "~1.0"
+    },
+
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "http://packages.dev1.kspu.ru"
+        }
+    ],
+
+    "autoload": {
+        "psr-0": {
+            "Kspu": "src/"
+        }
+    }
+}

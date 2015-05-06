@@ -1,0 +1,9 @@
+login:
+    path: /app/login/
+    defaults: { _controller: KspuLdapBundle:Auth:login }
+
+login_check:
+  path:              /app/login/check
+
+logout:
+  path:              /app/logout/

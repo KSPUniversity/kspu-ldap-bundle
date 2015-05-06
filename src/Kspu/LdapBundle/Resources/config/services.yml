@@ -1,0 +1,12 @@
+services:
+    kspu.ldap.ldap_manager:
+        class: Kspu\LdapBundle\Ldap\LdapManager
+        arguments:
+            - @fr3d_ldap.ldap_driver
+            - @fr3d_ldap.user_manager
+            - %fr3d_ldap.ldap_manager.parameters%
+    kspu.ldap.user_listener:
+        class: Kspu\LDAP\Entity\UserListener
+        arguments: [ @kspu_ldap.user_store ]
+        tags:
+            - { name: kernel.event_subscriber }
