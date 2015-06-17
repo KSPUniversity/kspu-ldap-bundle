@@ -26,7 +26,7 @@
         "symfony/translation": ">=2.5.3",
         "sensio/framework-extra-bundle": ">=3.0.1",
         "fr3d/ldap-bundle": "~2.0,<2.1",
-        "kspu/ldap": "~1.2"
+        "kspu/ldap": "~1.2,>=1.2.1"
     },
 
     "repositories": [
@@ -38,7 +38,7 @@
 
     "autoload": {
         "psr-0": {
-            "Kspu\\LdapBundle": "src/Kspu"
+            "Kspu\\LdapBundle": "src"
         }
     }
 }
