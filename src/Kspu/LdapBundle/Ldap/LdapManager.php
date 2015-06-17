@@ -3,7 +3,7 @@
 namespace Kspu\LdapBundle\Ldap;
 
 use FR3D\LdapBundle\Ldap\LdapManager as BaseLdapManager;
-use Kspu\LDAP\BaseUser;
+use Kspu\LDAP\Entity\BaseUser;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Role\RoleInterface;
 use Symfony\Component\Security\Core\User\UserInterface;

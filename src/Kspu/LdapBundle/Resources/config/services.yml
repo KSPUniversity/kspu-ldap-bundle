@@ -1,4 +1,18 @@
 services:
+    kspu.ldap.listener.ldap:
+        class: Kspu\LdapBundle\Mappings\Ldap\LdapListener
+        arguments:
+            - @service_container
+        calls:
+            - [setAnnotationReader, [@annotation_reader]]
+        tags:
+            - {name: doctrine.event_subscriber, connection: default}
+    kspu.ldap.validator.ldap_exists:
+        class: Kspu\LdapBundle\Validator\LdapExistsValidator
+        arguments:
+            - @fr3d_ldap.ldap_manager
+        tags:
+            - { name: validator.constraint_validator, alias: kspu.ldap.validator.ldap_exists}
     kspu.ldap.ldap_manager:
         class: Kspu\LdapBundle\Ldap\LdapManager
         arguments:

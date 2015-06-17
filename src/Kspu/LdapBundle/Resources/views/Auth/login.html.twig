@@ -8,6 +8,7 @@
 
     <div class="row">
         <div class="c-title">
+            {% block auth_extra_msg %}{% endblock %}
             {% if error is defined and error %}
                 <div class="m-danger">
                     {{ error.message|trans }}
