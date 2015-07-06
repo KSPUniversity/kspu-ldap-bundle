@@ -2,23 +2,24 @@
 namespace Kspu\LdapBundle\Mappings\Ldap\Mapping\Driver;
 
 use Gedmo\Mapping\Driver;
-use Doctrine\Common\Annotations\AnnotationReader;
+use Gedmo\Mapping\Driver\AbstractAnnotationDriver;
+use Gedmo\Exception\InvalidMappingException;
 
-class Annotation implements Driver {
-    private $_originalDriver = null;
+class Annotation extends AbstractAnnotationDriver {
+    const LDAP = 'Kspu\LdapBundle\Mappings\Ldap\Mapping\Ldap';
+
+    protected $validTypes = array(
+        'string',
+        'text',
+    );
+
     /**
-     * @param object $meta
-     * @param array $config
-     * @throws \Exception
-     * @return void
+     * {@inheritDoc}
      */
     public function readExtendedMetadata($meta, array &$config) {
-        $reader = new AnnotationReader();
-
-        $class = $meta->getReflectionClass();
-
+        $class = $this->getMetaReflectionClass($meta);
+        // property annotations
         foreach ($class->getProperties() as $property) {
-            // skip inherited properties
             if ($meta->isMappedSuperclass && !$property->isPrivate() ||
                 $meta->isInheritedField($property->name) ||
                 isset($meta->associationMappings[$property->name]['inherited'])
@@ -27,27 +28,22 @@ class Annotation implements Driver {
             }
 
             /** @var \Kspu\LdapBundle\Mappings\Ldap\Mapping\Ldap $ldap */
-            if ($ldap = $reader->getPropertyAnnotation($property, 'Kspu\LdapBundle\Mappings\Ldap\Mapping\Ldap')) {
+            if ($ldap = $this->reader->getPropertyAnnotation($property, self::LDAP)) {
                 $field = $property->getName();
 
                 if (!$meta->hasField($field))
-                    throw new \Exception("Field is not mapped as object property");
+                    throw new InvalidMappingException("Field is not mapped as object property");
 
                 if (empty($ldap->field)) {
-                    throw new \Exception("No field specified");
+                    throw new InvalidMappingException("No field specified");
                 }
 
-                $mapping = $meta->getFieldMapping($field);
-                if ($mapping['type'] != 'string') {
-                    throw new \Exception("Only strings are supported for ldap attributes");
+                if (!$this->isValidField($meta, $field)) {
+                    throw new InvalidMappingException("Only strings are supported for ldap attributes");
                 }
 
                 $config['ldap'][$field] = ['field' => $ldap->field];
             }
         }
-    }
-
-    public function setOriginalDriver($driver) {
-        $this->_originalDriver = $driver;
     }
 }
